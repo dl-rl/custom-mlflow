@@ -1,5 +1,5 @@
 from mlflow import *
-from mlflow import client, models, pyfunc, pytorch, tensorflow, onnx # Needs to be imported explicitly
+from mlflow import client, models, artifacts, pyfunc, pytorch, tensorflow, onnx # Needs to be imported explicitly
 import mlflow
 import sys
 import json
