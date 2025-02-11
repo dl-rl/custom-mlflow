@@ -1,3 +1,4 @@
+wheel
 # MLflow Requirements
 mlflow==2.19.0
 psutil==6.1.1
