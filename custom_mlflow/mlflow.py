@@ -12,7 +12,7 @@ __all__ = [
     "custom_set_experiment",
     "custom_get_current_run_id",
     "custom_start_run",
-    "custom_resume_run",
+    "custom_load_run",
     "custom_send_email_notification",
     "custom_get_local_params"
 ]
@@ -94,7 +94,7 @@ def custom_start_run():
     return mlflow.start_run(run_name=run_name, description=description, log_system_metrics=True)
 
 
-def custom_resume_run():
+def custom_load_run():
     global __custom_mlflow_details__
     run_name = __custom_mlflow_details__["experiment_details"]["run_name"].strip()
     description = __custom_mlflow_details__["experiment_details"]["run_description"]
@@ -102,9 +102,9 @@ def custom_resume_run():
     run_id = custom_get_current_run_id()
     
     if run_id == None: # Wants to continue run, but run doesn't exist
-        __show_error_and_exit__(f"Cannot resume run!!! Run \"{run_name}\" not found.")
+        __show_error_and_exit__(f"Cannot load run!!! Run \"{run_name}\" not found.")
     
-    return mlflow.start_run(run_id=run_id, description=description, log_system_metrics=True)
+    return mlflow.start_run(run_id=run_id, log_system_metrics=True)
 
 
 def custom_send_email_notification(subject, body):
