@@ -56,16 +56,16 @@ def custom_set_details_json_path(json_path="mlflow_details.json"):
     __perform_checks__()
 
 
-def custom_set_experiment(experiment_name=None, experiment_id=None):
+def custom_set_experiment(experiment_name=None):
     global __custom_mlflow_details__
-    experiment = mlflow.get_experiment_by_name(experiment_name)
-    if experiment == None:
-        experiment = mlflow.get_experiment(experiment_id)
-        if experiment.name == "Default":
-            experiment = None
+    experiment = None
+    experiments = mlflow.search_experiments(filter_string=f"name = '{experiment_name}'")
+    # Don't use mlflow.get_experiment_by_name because it doesn't work for non-admin users
+    if len(experiments) != 0:
+        experiment = experiments[0]
     
     if experiment != None or __custom_mlflow_details__["credentials"]["MLFLOW_TRACKING_URI"] == "":
-        experiment = mlflow.set_experiment(experiment_name=experiment_name, experiment_id=experiment_id)
+        experiment = mlflow.set_experiment(experiment_name=experiment_name)
     return experiment
 
 
@@ -73,7 +73,8 @@ def custom_get_current_run_id():
     global __custom_mlflow_details__
     experiment_name = __custom_mlflow_details__["experiment_details"]["experiment_name"].strip()
     run_name = __custom_mlflow_details__["experiment_details"]["run_name"].strip()
-    experiment = mlflow.get_experiment_by_name(experiment_name)
+    experiment = mlflow.search_experiments(filter_string=f"name = '{experiment_name}'")[0]
+    # Don't use mlflow.get_experiment_by_name because it doesn't work for non-admin users
     matched_runs = mlflow.search_runs(experiment_ids=[experiment.experiment_id], filter_string=f"run_name = '{run_name}'", output_format="list")
     run_id = None
     if len(matched_runs) > 0:
