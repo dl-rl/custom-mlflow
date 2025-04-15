@@ -52,6 +52,8 @@ def custom_set_details_json_path(json_path="mlflow_details.json"):
     os.environ["MLFLOW_TRACKING_URI"] = __custom_mlflow_details__["credentials"]["MLFLOW_TRACKING_URI"]
     os.environ["MLFLOW_TRACKING_USERNAME"] = __custom_mlflow_details__["credentials"]["MLFLOW_TRACKING_USERNAME"]
     os.environ["MLFLOW_TRACKING_PASSWORD"] = __custom_mlflow_details__["credentials"]["MLFLOW_TRACKING_PASSWORD"]
+    os.environ["MLFLOW_ENABLE_ASYNC_LOGGING"] = "true"
+    os.environ["MLFLOW_HTTP_REQUEST_MAX_RETRIES"] = "3"
 
     __perform_checks__()
 
