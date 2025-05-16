@@ -56,7 +56,7 @@ def custom_set_details_json_path(json_path="mlflow_details.json"):
     os.environ["MLFLOW_HTTP_REQUEST_BACKOFF_FACTOR "] = "2" # Specifies the backoff increase factor between MLflow HTTP request failures (default: 2)
     os.environ["MLFLOW_HTTP_REQUEST_BACKOFF_JITTER "] = "1.0" # Specifies the backoff jitter between MLflow HTTP request failures (default: 1.0)
     os.environ["MLFLOW_HTTP_REQUEST_MAX_RETRIES"] = "7" # Specifies the maximum number of retries with exponential backoff for MLflow HTTP requests (default: 7)
-    os.environ["MLFLOW_HTTP_REQUEST_TIMEOUT"] = "120" # Specifies the timeout in seconds for MLflow HTTP requests (default: 120)
+    os.environ["MLFLOW_HTTP_REQUEST_TIMEOUT"] = "600" # Specifies the timeout in seconds for MLflow HTTP requests (default: 120)
 
     __perform_checks__()
 
