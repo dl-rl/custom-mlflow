@@ -113,10 +113,10 @@ def custom_load_run():
     return mlflow.start_run(run_id=run_id, log_system_metrics=True)
 
 
-def custom_send_email_notification(subject, body):
+def custom_send_email_notification(subject, body, additional_emails=""): # additional emails ending with dl-rl.com are supported, others are ignored as a safety measure.
     global __custom_mlflow_details__
     try:
-        request_params = {"subject": subject, "body": body}
+        request_params = {"subject": subject, "body": body, "additional_emails": additional_emails}
         data = {}
         data["request_params"] = json.dumps(request_params)
         uri = __custom_mlflow_details__["credentials"]["MLFLOW_TRACKING_URI"]
