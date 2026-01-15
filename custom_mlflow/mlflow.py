@@ -87,12 +87,12 @@ def custom_get_current_run_id():
     return run_id
 
 
-def custom_get_run_name():
+def custom_get_current_run_name():
     global __custom_mlflow_details__
     return __custom_mlflow_details__["experiment_details"]["run_name"].strip()
 
 
-def custom_get_experiment_name():
+def custom_get_current_experiment_name():
     global __custom_mlflow_details__
     return __custom_mlflow_details__["experiment_details"]["experiment_name"].strip()
 
